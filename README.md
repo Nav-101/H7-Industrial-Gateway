@@ -6,7 +6,7 @@ The power subsystem is designed to provide stable, low-noise rails while ensurin
 The board features a dual-input architecture supporting both a DC Jack (unregulated) and USB-C (VBUS).
 * **Primary Protection:** The DC input includes a surface-mount fuse (**F1**) and a transient voltage suppressor (**D5**) to protect against overcurrent and high-voltage spikes.
 * **Power Multiplexing (TPS2113A):** A dedicated power mux (**U2**) manages the transition between the DC input and USB power. It prevents back-feeding and ensures a seamless 5V supply to the downstream regulators.
-* ![Schematic Section](./powerfront.png)
+* (./powerfront.png)
 
 ### 2. Multi-Stage Voltage Regulation
 The design utilizes a hierarchical approach to down-conversion to optimize efficiency and noise performance:
