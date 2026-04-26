@@ -1,7 +1,4 @@
 ## ⚡ Power Distribution Network (PDN) & Protection
-<script type="text/javascript" async
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
 The power subsystem is designed to provide stable, low-noise rails while ensuring hardware longevity through multi-stage industrial protection. 
 
 ### 1. Input Protection and Source Management
