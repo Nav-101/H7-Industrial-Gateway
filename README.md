@@ -52,6 +52,30 @@ A key challenge of the design is the physical sharing of the address and data bu
 
 ### 4. Schematic-Level Signal Integrity Measures
 While the physical routing is reserved for the next phase, the schematic includes critical foundational elements to ensure high-speed stability:
+
+## 🌐 Industrial Ethernet Interface (10/100 Mbps)
+
+The communication subsystem features a high-reliability 10/100 Mbps Ethernet interface using the **Microchip LAN8720AI** Industrial Temperature PHY. This stage is critical for edge-gateway connectivity and real-time data streaming.
+
+### Interface & Synchronization
+* **RMII Architecture:** The system utilizes the Reduced Media Independent Interface (RMII) to minimize pin count while maintaining a 100 Mbps data rate. 
+* **Synchronous Clocking:** A dedicated **50MHz Active Oscillator** provides a unified reference clock to both the LAN8720AI and the STM32H7 RMII_REF_CLK input. This hardware-level synchronization eliminates the jitter common in MCU-generated clocks (MCO), ensuring stable link performance in high-EMI environments.
+
+### Power Domain Isolation & Signal Integrity
+To protect the precision of the 24-bit ADC, the Ethernet power domain is strictly isolated:
+* **Isolated Rails:** The PHY analog supply (VDDA) and the RJ45 magnetics center taps are derived from the main 3.3V digital rail through a high-impedance **Ferrite Bead**. This prevents high-frequency switching noise from the transceivers from coupling into the sensitive analog acquisition rails.
+* **Magnetic Integration:** The design utilizes an **RJ45 MagJack (HR911105A)** with integrated 1:1 isolation transformers. This provides 1500Vrms isolation and integrated common-mode filtering.
+* **Termination:** 49.9 Ohm (1%) precision resistors are utilized for differential pair impedance matching, placed in close proximity to the PHY pins.
+
+### Protection & Robustness
+* **ESD Suppression:** The differential TX/RX pairs are protected by a low-capacitance ESD array, ensuring the high-speed signal integrity is not compromised while providing protection against cable-discharge events (CDE).
+* **Common Mode Filtering:** A discrete common-mode choke is placed on the differential lines to suppress radiated emissions, aiding in future EMC compliance testing.
+
+### Bootstrap Configuration
+The PHY is hardware-configured at power-up via strapping resistors:
+* **nINTSEL:** Configured for **REF_CLK In** mode to accept the 50MHz external oscillator.
+* **REGOFF:** Internal 1.2V regulator enabled, simplifying the power tree and reducing external component requirements.
+* **PHYAD:** Hardware-set to Address 0 for deterministic software initialization via the MDIO/MDC management interface.
 * **Series Termination:** Included 22 Ohm resistors on high-speed lines (like SDCLK) to manage impedance and dampen potential reflections at the source.
 * **Decoupling Strategy:** Implemented a comprehensive decoupling matrix for the BGA footprints, utilizing a mix of 100nF and 1uF ceramic capacitors to provide local charge reservoirs for every power pin.
 * **Pin Mapping Logic:** Carefully mapped the multiplexed FMC pins (A14/BA0 and A15/BA1) to ensure the STM32H7 can correctly address both the 4-bank SDRAM and the linear Page-Mode Flash without electrical conflicts.
