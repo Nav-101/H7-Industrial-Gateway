@@ -94,7 +94,7 @@ For long-distance serial communication (up to 1.2km), a half-duplex **3.3V RS-48
 
 
 
-### 🧪 Validation & Testing Strategy
+### 🧪 Validation & Testing Strategy (PLANNED)
 * **CAN-FD:** Verified using a PC-based CAN analyzer (e.g., PCAN-USB) to monitor frame integrity at 5 Mbps.
 * **RS-485:** Tested via a USB-to-RS485 bridge using the **Modbus RTU** protocol to simulate industrial sensor data acquisition.
 * **Series Termination:** Included 22 Ohm resistors on high-speed lines (like SDCLK) to manage impedance and dampen potential reflections at the source.
