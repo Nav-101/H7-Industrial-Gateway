@@ -92,7 +92,7 @@ For long-distance serial communication (up to 1.2km), a half-duplex **3.3V RS-48
 * **Asymmetrical ESD Protection:** Utilizes an **SM712** TVS diode specifically designed for RS-485, accommodating the unique -7V to +12V common-mode voltage range of the protocol.
 * **Impedance Matching:** Includes a $22\Omega$ series termination resistor at the MCU UART TX pin to minimize signal reflections.
 
-
+![RS](./RS.png)
 
 ### 🧪 Validation & Testing Strategy (PLANNED)
 * **CAN-FD:** Verified using a PC-based CAN analyzer (e.g., PCAN-USB) to monitor frame integrity at 5 Mbps.
