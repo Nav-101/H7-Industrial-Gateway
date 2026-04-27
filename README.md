@@ -73,6 +73,30 @@ The PHY is hardware-configured at power-up via strapping resistors:
 * **nINTSEL:** Configured for **REF_CLK In** mode to accept the 50MHz external oscillator.
 * **REGOFF:** Internal 1.2V regulator enabled, simplifying the power tree and reducing external component requirements.
 * **PHYAD:** Hardware-set to Address 0 for deterministic software initialization via the MDIO/MDC management interface.
+
+* ## 🚌 Industrial Communication Zone (CAN-FD & RS-485)
+
+The gateway features a dual-protocol industrial bus zone designed for long-distance reliability and automotive-grade communication. Both interfaces include multi-stage ESD protection and configurable bus termination.
+
+### 1. CAN-FD (Flexible Data-Rate)
+The CAN interface is powered by the **TCAN1051V** transceiver, supporting data rates up to 5 Mbps.
+* **Level Shifting:** The "V" variant is utilized to bridge the 3.3V STM32H7 FDCAN logic with the 5V CAN bus standard.
+* **Industrial Protection:** A dedicated **PESD2CAN** TVS diode array is placed at the DB9 connector to clamp high-voltage transients.
+* **Configurable Termination:** A $120\Omega$ termination resistor is included via a physical jumper (**JP2**), allowing the board to act as either a node or a bus terminator.
+* **Standardization:** The DB9 connector follows the **CiA 303-1** industry-standard pinout (Pin 2: CAN-L, Pin 7: CAN-H).
+
+### 2. RS-485 (Differential Serial)
+For long-distance serial communication (up to 1.2km), a half-duplex **3.3V RS-485 Transceiver (SP3485/MAX3485)** is implemented.
+* **Fail-Safe Biasing:** To prevent "ghost" data during bus idle states, external $10\text{k}\Omega$ pull-up/pull-down resistors are placed on the A and B lines. This ensures a defined logic state even when no drivers are active.
+* **Directional Control:** A single GPIO pin manages the combined **RE/DE** (Receive/Driver Enable) lines, allowing the STM32H7 to switch seamlessly between transmit and receive modes.
+* **Asymmetrical ESD Protection:** Utilizes an **SM712** TVS diode specifically designed for RS-485, accommodating the unique -7V to +12V common-mode voltage range of the protocol.
+* **Impedance Matching:** Includes a $22\Omega$ series termination resistor at the MCU UART TX pin to minimize signal reflections.
+
+
+
+### 🧪 Validation & Testing Strategy
+* **CAN-FD:** Verified using a PC-based CAN analyzer (e.g., PCAN-USB) to monitor frame integrity at 5 Mbps.
+* **RS-485:** Tested via a USB-to-RS485 bridge using the **Modbus RTU** protocol to simulate industrial sensor data acquisition.
 * **Series Termination:** Included 22 Ohm resistors on high-speed lines (like SDCLK) to manage impedance and dampen potential reflections at the source.
 * **Decoupling Strategy:** Implemented a comprehensive decoupling matrix for the BGA footprints, utilizing a mix of 100nF and 1uF ceramic capacitors to provide local charge reservoirs for every power pin.
 * **Pin Mapping Logic:** Carefully mapped the multiplexed FMC pins (A14/BA0 and A15/BA1) to ensure the STM32H7 can correctly address both the 4-bank SDRAM and the linear Page-Mode Flash without electrical conflicts.
