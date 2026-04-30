@@ -5,7 +5,7 @@ A high-performance, 8-layer embedded system designed for industrial edge computi
 high-speed data logging, and audio-frequency signal processing. This project 
 demonstrates expertise in high-speed digital design (SDRAM/QSPI), complex 
 communications (Ethernet/CAN/RS485), and precision mixed-signal integration.
-
+![frontpg](./frontpg.png)
 ## Key Technical Features
 *   **Core:** STM32H7 (ARM Cortex-M7) running at 400MHz+.
 *   **Memory Architecture:** 
@@ -125,3 +125,30 @@ For long-distance serial communication (up to 1.2km), a half-duplex **3.3V RS-48
 * **Decoupling Strategy:** Implemented a comprehensive decoupling matrix for the BGA footprints, utilizing a mix of 100nF and 1uF ceramic capacitors to provide local charge reservoirs for every power pin.
 * **Pin Mapping Logic:** Carefully mapped the multiplexed FMC pins (A14/BA0 and A15/BA1) to ensure the STM32H7 can correctly address both the 4-bank SDRAM and the linear Page-Mode Flash without electrical conflicts.
 * **Hardware Handshaking:** Integrated the RY/BY# to NWAIT hardware link with a dedicated pull-up resistor to prevent bus-stall issues during Flash erase/write cycles.
+
+* ## Audio Subsystem (TLV320AIC3104)
+
+### Overview
+This module integrates a 24-bit Low-Power Stereo Audio Codec to provide high-quality 
+audio-frequency I/O for voice-over-IP (VoIP) or acoustic monitoring.
+
+![codec](./codec.png)
+### Design Implementation
+*   **Digital Interface:** Connected via STM32H7 Serial Audio Interface (SAI) 
+    using DMA for zero-CPU-load audio streaming. Control handled via I2C.
+*   **Input Stage:** 
+    *   Mono Microphone input via 3.5mm TRS jack.
+    *   Implemented using a **Pseudo-Differential** configuration (MIC1LP/MIC1LM) 
+        to maximize common-mode noise rejection on the 8-layer board.
+    *   AC-coupled via 100nF C0G capacitors for DC offset removal.
+*   **Output Stage:**
+    *   Stereo Headphone output via 3.5mm TRS jack.
+    *   **AC-Coupled Strategy:** Utilizes 47µF high-quality tantalum capacitors to 
+        block DC bias (VCM), ensuring compatibility with all standard 32Ω headphones 
+        and protecting the load from power-on transients.
+    *   Return path grounded to a dedicated Analog Ground (AGND) plane to minimize 
+        digital return current interference.
+*   **Diagnostic Features:** 
+    *   Parallel 2.54mm headers included for direct probe access to Line-Out 
+        (LEFT_LOP/M) and Speaker paths, facilitating bench-top testing and 
+        external amplification expansion.
