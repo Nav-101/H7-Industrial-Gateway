@@ -1,3 +1,27 @@
+# H7 Industrial Gateway & Data Acquisition System
+
+## Project Objective
+A high-performance, 8-layer embedded system designed for industrial edge computing, 
+high-speed data logging, and audio-frequency signal processing. This project 
+demonstrates expertise in high-speed digital design (SDRAM/QSPI), complex 
+communications (Ethernet/CAN/RS485), and precision mixed-signal integration.
+
+## Key Technical Features
+*   **Core:** STM32H7 (ARM Cortex-M7) running at 400MHz+.
+*   **Memory Architecture:** 
+    *   External SDRAM via 32-bit FMC interface for high-speed buffering.
+    *   QSPI NOR Flash for robust firmware storage and assets.
+*   **Connectivity:** 
+    *   Industrial Comms: Isolated CAN and RS485 (TIA/EIA-485) for field-bus reliability.
+    *   Networking: 10/100 Ethernet (RMII interface) for IoT gateway functionality.
+    *   USB: USB-C OTG for high-speed configuration and data offloading.
+*   **Analog & Audio Subsystems:**
+    *   **Codec:** TLV320AIC3104 (24-bit Stereo) for voice-band processing and I/O.
+    *   **Precision ADC:** ADS1220 (24-bit Delta-Sigma) for high-accuracy sensor data acquisition.
+*   **PCB Topology:** 8-layer stackup optimized for Signal Integrity (SI), 
+    Power Integrity (PI), and EMI/EMC compliance in harsh environments.
+
+
 ## ⚡ Power Distribution Network (PDN) & Protection
 The power subsystem is designed to provide stable, low-noise rails while ensuring hardware longevity through multi-stage industrial protection. 
 
