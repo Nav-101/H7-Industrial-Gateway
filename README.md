@@ -152,3 +152,33 @@ audio-frequency I/O for voice-over-IP (VoIP) or acoustic monitoring.
     *   Parallel 2.54mm headers included for direct probe access to Line-Out 
         (LEFT_LOP/M) and Speaker paths, facilitating bench-top testing and 
         external amplification expansion.
+### **Precision Data Acquisition Subsystem (ADS1220)**
+
+#### **Overview**
+This module is a high-resolution, 24-bit sensing interface designed to capture low-frequency seismic signals from geophones and industrial sensors. By combining the **ADS1220** Delta-Sigma ADC with a custom-engineered **Analog Front End (AFE)**, the system achieves professional-grade signal integrity on an 8-layer industrial board.
+
+![ADC](./ADC_I.png)
+#### **Key Design Implementations**
+
+*   **Precision Voltage Reference:** 
+    *   Utilizes the **REF5025AIDR** ultra-low-noise 2.5V reference (U20) to ensure absolute measurement accuracy.
+    *   Includes high-frequency decoupling ($1\mu F$ and $100nF$) to stabilize the reference input during high-speed sampling cycles.
+*   **Active Virtual Ground (1.65V Bias):** 
+    *   An **OPA320AIDBVR** (U21) buffers a $10k\Omega$ precision divider (R101, R102) to generate a "stiff" $1.65V$ mid-rail reference.
+    *   This "lifts" bipolar geophone signals into the positive common-mode range of the ADC, allowing full-wave capture on a single $3.3V$ supply.
+*   **Industrial Front-End Protection:** 
+    *   **SMAJ12CA TVS Diode (D6):** Provides a differential clamp at the input connector (P3) to protect against ESD and cable surges.
+    *   **Current Limiting:** $100\Omega$ series resistors (R107, R108) safeguard the AFE components from over-voltage transients.
+*   **Signal Conditioning & Filtering:**
+    *   **AC Coupling:** $10\mu F$ capacitors (C123, C124) block DC offsets while maintaining a flat frequency response for seismic vibrations.
+    *   **DC Biasing:** $220k\Omega$ resistors (R103, R104) prevent the inputs from floating and establish a stable $1.65V$ operating point.
+    *   **Passive Anti-Aliasing:** A balanced RC filter ($1k\Omega$ / $470nF$) provides a low-pass cutoff at $\approx 338Hz$. This suppresses digital switching noise from the **STM32H7** and **SDRAM** planes.
+*   **Digital Integration:**
+    *   Communicates with the MCU via high-speed SPI (SPI2) with hardware synchronization via the **DRDY** (Data Ready) pin.
+    *   The $100\Omega$ series resistor (R96) on the CS line prevents ringing on the chip-select signal during high-speed bus transactions.
+
+#### **Technical Specifications**
+*   **Resolution:** 24-bit Delta-Sigma.
+*   **Reference Voltage:** 2.5V (External REF5025).
+*   **Filter Cutoff ($f_c$):** $\approx 338Hz$.
+*   **Input Topology:** Fully Differential with Pseudo-Differential DC Bias.
