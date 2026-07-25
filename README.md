@@ -1,6 +1,6 @@
 
 
-</section>
+
 ![pcb](./5.png)
 The layout is being organised into functional zones: power entry and regulation, high-speed digital memory/interface routing, industrial communications, Ethernet/USB connectivity, and low-noise analog/audio acquisition. The next focus is controlled routing of the FMC SDRAM/NOR memory bus, USB/Ethernet signal paths, PDN refinement, decoupling placement, and maintaining clean separation between noisy digital domains and precision analog circuitry.
 
