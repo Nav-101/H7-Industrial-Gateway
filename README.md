@@ -23,7 +23,7 @@ Unlike a conventional microcontroller development board, this design required th
 - Manufacturing and assembly constraints
 - Accessibility for programming, testing and board bring-up
 
-![Completed STM32H7 Industrial Gateway PCB layout](assets/images/pcb-layout-complete.png)
+![pcb](./6.png)
 
 *Completed 10-layer PCB layout showing the STM32H7 processor, external memories, communication interfaces, analogue acquisition circuitry and multi-rail power architecture.*
 
