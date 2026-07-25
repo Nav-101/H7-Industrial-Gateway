@@ -6,7 +6,7 @@
 
 PCB Layout Progress
 
-The project has now moved from schematic capture into the physical PCB implementation stage. The current 3D render shows the first major placement pass for the 8-layer STM32H7 industrial gateway board. The external interfaces — DC input, USB-C, Ethernet, DB9 CAN, audio jacks, debug headers, and field terminal blocks — have been positioned around the board edge for practical access during enclosure integration and bench bring-up.
+The project has now moved from schematic capture into the physical PCB implementation stage. The current 3D render shows the first major placement pass for the 10-layer STM32H7 industrial gateway board. The external interfaces — DC input, USB-C, Ethernet, DB9 CAN, audio jacks, debug headers, and field terminal blocks — have been positioned around the board edge for practical access during enclosure integration and bench bring-up.
 ![pcb](./5.png)
 The layout is being organised into functional zones: power entry and regulation, high-speed digital memory/interface routing, industrial communications, Ethernet/USB connectivity, and low-noise analog/audio acquisition. The next focus is controlled routing of the FMC SDRAM/NOR memory bus, USB/Ethernet signal paths, PDN refinement, decoupling placement, and maintaining clean separation between noisy digital domains and precision analog circuitry.
 
