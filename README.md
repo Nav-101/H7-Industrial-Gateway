@@ -9,7 +9,7 @@ The STM32H7 Industrial Gateway is a **10-layer mixed-signal embedded system** bu
 The board has not yet been manufactured or electrically validated. The current design is undergoing final schematic, layout and manufacturing-file verification before fabrication.
 
 ![pcb](./6.png)
-<img src="./6.png" width="200" height="100">
+<img src="./6.png" width="500" height="500">
 
 *Completed PCB layout showing the STM32H7 processor, external memories, communication interfaces, analogue acquisition circuitry and multi-rail power system.*
 
