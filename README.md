@@ -48,6 +48,7 @@ The board integrates:
 
 The PCB was developed around signal integrity, power integrity, return-current continuity, functional partitioning, manufacturability and practical board bring-up.
 
+![orbitfront](./orbitfront.png) 
 ## Core Processing
 
 The system is based on the **STM32H743**, a high-performance Arm Cortex-M7 microcontroller capable of operating at up to **480 MHz**.
